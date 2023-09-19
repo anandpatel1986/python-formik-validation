@@ -5,6 +5,7 @@ export const SignupForm = () => {
   const [customers, setCustomers] = useState([{}]);
   const [refreshPage, setRefreshPage] = useState(false);
   // Pass the useFormik() hook initial form values and a submit function that will
+
   // be called when the form is submitted
 
   useEffect(() => {
@@ -20,13 +21,7 @@ export const SignupForm = () => {
   const formSchema = yup.object().shape({
     email: yup.string().email("Invalid email").required("Must enter email"),
     name: yup.string().required("Must enter a name").max(15),
-    age: yup
-      .number()
-      .positive()
-      .integer()
-      .required("Must enter age")
-      .typeError("Please enter an Integer")
-      .max(125),
+    age: yup.number().positive().integer().required("Must enter age").typeError("Please enter an Integer").max(125),
   });
 
   const formik = useFormik({
@@ -57,33 +52,18 @@ export const SignupForm = () => {
       <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
         <label htmlFor="email">Email Address</label>
         <br />
-        <input
-          id="email"
-          name="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
+        <input id="email" name="email" onChange={formik.handleChange} value={formik.values.email} />
         <p style={{ color: "red" }}> {formik.errors.email}</p>
         <label htmlFor="name">Name</label>
         <br />
 
-        <input
-          id="name"
-          name="name"
-          onChange={formik.handleChange}
-          value={formik.values.name}
-        />
+        <input id="name" name="name" onChange={formik.handleChange} value={formik.values.name} />
         <p style={{ color: "red" }}> {formik.errors.name}</p>
 
         <label htmlFor="age">age</label>
         <br />
 
-        <input
-          id="age"
-          name="age"
-          onChange={formik.handleChange}
-          value={formik.values.age}
-        />
+        <input id="age" name="age" onChange={formik.handleChange} value={formik.values.age} />
         <p style={{ color: "red" }}> {formik.errors.age}</p>
         <button type="submit">Submit</button>
       </form>
